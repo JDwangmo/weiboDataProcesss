@@ -8,15 +8,29 @@ data_filter:
   path: /home/jdwang/PycharmProjects/weiboDataProcesss/preprocess/data_filter.py
   name: data_filter
   describe: 对数据进行预处理——去除非法字符，只留下中文
-  data_file_path: /media/jdwang/My Book/复旦大学/SMP-Weibo/sample/weibodata.csv
-  output_file_path: /media/jdwang/My Book/复旦大学/SMP-Weibo/sample/weibodata_filter.csv
+  data_file_path: I:/复旦大学/SMP-Weibo/sample/weibodata.csv
+  output_file_path: &output_file_path1 I:/复旦大学/SMP-Weibo/sample/weibodata_filter.csv
   log_file_path: log/data_filter_20160524.log
 
 data_segment:
   path: /home/jdwang/PycharmProjects/weiboDataProcesss/preprocess/data_segment.py
   name: data_segment
   describe: 对数据进行预处理——切词
-  input_file_path: /media/jdwang/My Book/复旦大学/SMP-Weibo/sample/weibodata_filter.csv
-  output_file_path: /media/jdwang/My Book/复旦大学/SMP-Weibo/sample/weibodata_segment.csv
+  input_file_path: *output_file_path1
+  output_file_path: &output_file_path2 I:/复旦大学/SMP-Weibo/sample/weibodata_segment.csv
   log_file_path: log/data_segment_20160524.log
 
+train_word2vec:
+  path: I:\复旦大学\SMP-Weibo\sample\weiboDataProcesss\preprocess\train_word2vec.py
+  name: train_word2vec
+  describe: 生成word2vec词向量
+  input_file_path: *output_file_path2
+  output_file_path: &output_file_path3 I:/复旦大学/SMP-Weibo/sample/weibodata_vector.gem
+  log_file_path: log/train_word2vec_20160524.log
+
+load_word2vec:
+  path: I:\复旦大学\SMP-Weibo\sample\weiboDataProcesss\preprocess\load_word2vec.py
+  name: load_word2vec
+  describe: 加载word2vec词向量
+  input_file_path: *output_file_path3
+  log_file_path: log/load_word2vec_20160526.log
