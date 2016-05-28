@@ -21,7 +21,10 @@ output_file_path = config['output_file_path']
 logging.debug(config['describe'])
 out = io.open(output_file_path,'w',encoding='utf8')
 # 使用正则过滤掉非中文的字符
-pattern = re.compile(u'[^\u4e00-\u9fa5]+')
+# pattern = re.compile(u'[^\u4e00-\u9fa5]+')
+# 过滤掉非中文、数字、字母的字符
+pattern = re.compile(u'[^\u4e00-\u9fa5a-zA-Z0-9]+')
+
 filter_not_chinese_text = lambda x: pattern.sub(' ', x.decode('utf8'))
 counter = 0
 error_line_counter = 0
